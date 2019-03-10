@@ -1,6 +1,9 @@
 let socket = io();
 let mapContainer;
 let map;
+
+let lastUpdate = new Date();
+
 function startGame() {
   let nickname = document.querySelector("#nickname").value;
 
@@ -137,6 +140,9 @@ let GameEngine = {
 };
 
 socket.on("state", function(players) {
+  let oldUpdate = lastUpdate;
+  lastUpdate = new Date();
+  document.querySelector("#update").innerHTML = lastUpdate - oldUpdate;
   if (map) {
     map.clearRect(0, 0, mapContainer.width, mapContainer.height);
     // draw origin planet
