@@ -2,7 +2,7 @@ let app = require("express")();
 let http = require("http").Server(app);
 let io = require("socket.io")(http);
 
-let port = 8000;
+let port = process.env.PORT || 8000;
 
 app.get("/*", (req, res) => {
   res.sendFile(__dirname + req.url);
