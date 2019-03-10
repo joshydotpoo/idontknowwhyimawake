@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>spacegame</title>
+  <style>
+    canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #hud {
+      position: absolute;
+      z-index: 100;
+      padding: 20px;
+      font-size: 15px;
+      background: blue;
+      color: white;
+      top: 0; left: 0;
+}
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src='lib/threejs/three.js'></script>
+  <script src='lib/threejs/OrbitControls.js'></script>
+  <script src='lib/threejs/MeshDictionary.js'></script>
+  <script src='lib/client/ClientController.js'></script>
+  <script src='lib/client/GameEngine.js'></script>
+  <script src='lib/client/GameView.js'></script>
+  <script src='client.js'></script>
+</head>
+<body>
+  <div id='hud'></div>
+</body>
+</html>

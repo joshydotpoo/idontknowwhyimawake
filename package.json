@@ -1,0 +1,20 @@
+{
+  "name": "mmo",
+  "version": "1.0.0",
+  "description": "Spacegame MMO",
+  "main": "client.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "@joshydotpoo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0",
+    "websocket": "^1.0.28"
+  }
+}
