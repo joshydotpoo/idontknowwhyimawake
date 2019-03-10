@@ -135,14 +135,14 @@ let GameEngine = {
   },
   run: function() {
     requestAnimationFrame(GameEngine.run);
+    let oldUpdate = lastUpdate;
+    lastUpdate = new Date();
+    document.querySelector("#update").innerHTML = lastUpdate - oldUpdate;
     GameEngine.renderer.render(GameEngine.scene, GameEngine.camera);
   }
 };
 
 socket.on("state", function(players) {
-  let oldUpdate = lastUpdate;
-  lastUpdate = new Date();
-  document.querySelector("#update").innerHTML = lastUpdate - oldUpdate;
   if (map) {
     map.clearRect(0, 0, mapContainer.width, mapContainer.height);
     // draw origin planet
