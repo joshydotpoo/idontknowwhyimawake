@@ -137,7 +137,8 @@ let GameEngine = {
     requestAnimationFrame(GameEngine.run);
     let oldUpdate = lastUpdate;
     lastUpdate = new Date();
-    document.querySelector("#update").innerHTML = lastUpdate - oldUpdate;
+    document.querySelector("#update").innerHTML =
+      lastUpdate - oldUpdate + " fps";
     GameEngine.renderer.render(GameEngine.scene, GameEngine.camera);
   }
 };
