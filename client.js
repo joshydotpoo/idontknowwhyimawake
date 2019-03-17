@@ -51,6 +51,7 @@ let GameEngine = {
   meshes: null,
   domevents: null,
   initialized: false,
+  stats: null,
   init: function() {
     console.log("initializing game engine");
     let HEIGHT = window.innerHeight;
@@ -66,6 +67,11 @@ let GameEngine = {
     GameEngine.renderer = new THREE.WebGLRenderer();
     GameEngine.renderer.setSize(WIDTH, HEIGHT);
     GameEngine.renderer.shadowMap.enabled = true;
+    GameEngine.stats = new Stats();
+    GameEngine.stats.domElement.style.position = "absolute";
+    GameEngine.stats.domElement.style.left = "0";
+    GameEngine.stats.domElement.style.top = "0";
+    GameEngine.stats.showPanel(0);
     // GameEngine.camera.position.set(0, 150, -150);
     // GameEngine.camera.lookAt(0, 0, 0);
     GameEngine.meshes = {};
@@ -82,6 +88,8 @@ let GameEngine = {
     GameEngine.initialized = true;
     window.addEventListener("resize", GameEngine.resizeWindow, false);
     document.body.appendChild(GameEngine.renderer.domElement);
+    document.body.appendChild(GameEngine.stats.dom);
+
     let mapcont = document.querySelector("#map");
     let context = mapcont.getContext("2d");
     context.beginPath();
@@ -135,15 +143,16 @@ let GameEngine = {
   },
   run: function() {
     requestAnimationFrame(GameEngine.run);
-    let oldUpdate = lastUpdate;
-    lastUpdate = new Date();
-    document.querySelector("#update").innerHTML =
-      lastUpdate - oldUpdate + " fps";
     GameEngine.renderer.render(GameEngine.scene, GameEngine.camera);
+    GameEngine.stats.update();
   }
 };
 
 socket.on("state", function(players) {
+  let oldUpdate = lastUpdate;
+  lastUpdate = new Date();
+  document.querySelector("#update").innerHTML =
+    lastUpdate - oldUpdate + " ms since last server update";
   if (map) {
     map.clearRect(0, 0, mapContainer.width, mapContainer.height);
     // draw origin planet
